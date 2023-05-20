@@ -12,7 +12,9 @@ function check(value) {
   function isEqualTo(expected) {
     if (!checkDeeplyEqual(value, expected))
       throw new Error(
-        `${customStringify(value)}\n is not equal to the expected value of\n ${customStringify(expected)}`
+        `${customStringify(value)}\n is not equal to the expected value of\n ${customStringify(
+          expected
+        )}`
       );
   }
   return { isEqualTo };

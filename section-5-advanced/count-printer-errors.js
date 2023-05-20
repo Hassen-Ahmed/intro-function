@@ -21,8 +21,10 @@ countPrinterErrors(control) should return "8/22"
 
  */
 
-function countPrinterErrors() {
+function countPrinterErrors(record) {
   // your solution here
+  let machineErrors = [...record].filter((el) => /[^a-m]/g.test(el)).length;
+  return `${machineErrors}/${record.length}`;
 }
 
 runTest("countPrinterErrors() should return a string", function () {

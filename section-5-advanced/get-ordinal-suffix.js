@@ -11,6 +11,17 @@ See here for more details: https://www.grammarly.com/blog/how-to-write-ordinal-n
 
 function getOrdinalSuffix(num) {
   // your solution here
+  let suffix = "";
+  if ((num >= 4 && num <= 20) || /\d*[4-9]\b/g.test(num)) {
+    suffix = "th";
+  } else if (/\d*1\b/g.test(num) || num === 1) {
+    suffix = "st";
+  } else if (/\d*2\b/g.test(num)) {
+    suffix = "nd";
+  } else if (/\d*3\b/g.test(num)) {
+    suffix = "rd";
+  }
+  return suffix;
 }
 
 runTest("getOrdinalSuffix() returns 'st' when given 1", function () {
@@ -25,49 +36,34 @@ runTest("getOrdinalSuffix() returns 'rd' when given 3", function () {
   check(getOrdinalSuffix(3)).isEqualTo("rd");
 });
 
-runTest(
-  "getOrdinalSuffix() returns 'th' given any single digit number above 3",
-  function () {
-    check(getOrdinalSuffix(4)).isEqualTo("th");
-    check(getOrdinalSuffix(7)).isEqualTo("th");
-    check(getOrdinalSuffix(9)).isEqualTo("th");
-  }
-);
+runTest("getOrdinalSuffix() returns 'th' given any single digit number above 3", function () {
+  check(getOrdinalSuffix(4)).isEqualTo("th");
+  check(getOrdinalSuffix(7)).isEqualTo("th");
+  check(getOrdinalSuffix(9)).isEqualTo("th");
+});
 
-runTest(
-  "getOrdinalSuffix() returns 'th' given any value between 10 and 20 inclusive",
-  function () {
-    check(getOrdinalSuffix(10)).isEqualTo("th");
-    check(getOrdinalSuffix(11)).isEqualTo("th");
-    check(getOrdinalSuffix(15)).isEqualTo("th");
-    check(getOrdinalSuffix(19)).isEqualTo("th");
-    check(getOrdinalSuffix(20)).isEqualTo("th");
-  }
-);
+runTest("getOrdinalSuffix() returns 'th' given any value between 10 and 20 inclusive", function () {
+  check(getOrdinalSuffix(10)).isEqualTo("th");
+  check(getOrdinalSuffix(11)).isEqualTo("th");
+  check(getOrdinalSuffix(15)).isEqualTo("th");
+  check(getOrdinalSuffix(19)).isEqualTo("th");
+  check(getOrdinalSuffix(20)).isEqualTo("th");
+});
 
-runTest(
-  "getOrdinalSuffix() returns 'st' for numbers above 20 ending in 1",
-  function () {
-    check(getOrdinalSuffix(21)).isEqualTo("st");
-    check(getOrdinalSuffix(41)).isEqualTo("st");
-  }
-);
+runTest("getOrdinalSuffix() returns 'st' for numbers above 20 ending in 1", function () {
+  check(getOrdinalSuffix(21)).isEqualTo("st");
+  check(getOrdinalSuffix(41)).isEqualTo("st");
+});
 
-runTest(
-  "getOrdinalSuffix() returns 'nd' for numbers above 20 ending in 2",
-  function () {
-    check(getOrdinalSuffix(22)).isEqualTo("nd");
-    check(getOrdinalSuffix(32)).isEqualTo("nd");
-  }
-);
+runTest("getOrdinalSuffix() returns 'nd' for numbers above 20 ending in 2", function () {
+  check(getOrdinalSuffix(22)).isEqualTo("nd");
+  check(getOrdinalSuffix(32)).isEqualTo("nd");
+});
 
-runTest(
-  "getOrdinalSuffix() returns 'rd' for numbers above 20 ending in 3",
-  function () {
-    check(getOrdinalSuffix(23)).isEqualTo("rd");
-    check(getOrdinalSuffix(63)).isEqualTo("rd");
-  }
-);
+runTest("getOrdinalSuffix() returns 'rd' for numbers above 20 ending in 3", function () {
+  check(getOrdinalSuffix(23)).isEqualTo("rd");
+  check(getOrdinalSuffix(63)).isEqualTo("rd");
+});
 
 runTest("getOrdinalSuffix() returns 'th' for any other numbers", function () {
   check(getOrdinalSuffix(27)).isEqualTo("th");

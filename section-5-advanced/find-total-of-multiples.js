@@ -13,6 +13,24 @@ Note: If the number is a multiple of both 3 and 5, only count it once! */
 
 function findTotalOfMultiples(limit) {
   // your solution
+  let multiples = [];
+  if (limit <= 0) 0;
+  for (let i = 1; i <= limit; i++) {
+    let multipleOfThree = i * 3;
+    let multipleOfFive = i * 5;
+
+    if (multipleOfThree < limit && multipleOfFive < limit && multipleOfThree === multipleOfFive) {
+      multiples.push(multipleOfThree);
+    } else if (multipleOfThree < limit && multipleOfFive < limit) {
+      multiples.push(multipleOfThree);
+      multiples.push(multipleOfFive);
+    } else if (multipleOfThree < limit) {
+      multiples.push(multipleOfThree);
+    } else if (multipleOfFive < limit) {
+      multiples.push(multipleOfThree);
+    }
+  }
+  return multiples.reduce((acc, multiple) => acc + multiple, 0);
 }
 
 runTest("findTotalOfMultiples() return zero for negative numbers", function () {
@@ -23,10 +41,7 @@ runTest("findTotalOfMultiples() returns first multiple of 3", function () {
   check(findTotalOfMultiples(4)).isEqualTo(3);
 });
 
-runTest(
-  "findTotalOfMultiples() returns sum of multiples of 3 or 5  below limit ",
-  function () {
-    check(findTotalOfMultiples(6)).isEqualTo(8);
-    check(findTotalOfMultiples(10)).isEqualTo(23);
-  }
-);
+runTest("findTotalOfMultiples() returns sum of multiples of 3 or 5  below limit ", function () {
+  check(findTotalOfMultiples(6)).isEqualTo(8);
+  check(findTotalOfMultiples(10)).isEqualTo(23);
+});
